@@ -1,4 +1,7 @@
 package common;
+
+import com.github.javafaker.Faker;
+
 /**
  * 5.11.2020
  * @author Aziz Tokhirov
@@ -7,6 +10,8 @@ package common;
 
 
 public class Common {
+	
+	private static Faker faker = new Faker();
 
 	public static void main(String[] args) {
 
@@ -21,6 +26,16 @@ public class Common {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static String getRandomFirstname() {
+		return faker.firstName();
+		
+		
+	}
+	
+	public static String getRandomLastname() {
+		return faker.lastName();
 	}
 
 	public static String getRandomEmail(String firstName, String lastName) {
