@@ -14,6 +14,7 @@ public class AssertDemo {
 		String a = "asd";
 		String s = "asd";
 		
+		
 		boolean b = true;
 		Assert.assertEquals(b, true);
 		
