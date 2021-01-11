@@ -22,6 +22,7 @@ public class WebDriverSwitchDemo extends Driver{
 	@Test
 	public void switchToIFrame() {
 		driver.get("http://testleaf.herokuapp.com/pages/frame.html");
+		
 		Common.sleep(1);
 		driver.switchTo().frame(0);
 		driver.findElement(By.xpath("//button[@id='Click']")).click();

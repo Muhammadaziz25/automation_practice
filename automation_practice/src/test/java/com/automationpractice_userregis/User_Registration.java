@@ -34,7 +34,7 @@ public class User_Registration extends Driver {
 		driver.findElement(By.id("email_create")).sendKeys(email);
 		Common.sleep(2);
 		driver.findElement(By.id("SubmitCreate")).click();
-		driverHelper.takeScreenshot();
+//		driverHelper.takeScreenshot();
 			
 		Common.sleep(2);
 		String actualText = driver.findElement(By.xpath("//h1[text()='Create an account']")).getText();
