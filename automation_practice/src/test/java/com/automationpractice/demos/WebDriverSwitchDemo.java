@@ -25,6 +25,9 @@ public class WebDriverSwitchDemo extends Driver{
 		
 		Common.sleep(1);
 		driver.switchTo().frame(0);
+		WebDriverWait driverWait = new WebDriverWait(driver, 10);
+		driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("Click")));
+		
 		driver.findElement(By.xpath("//button[@id='Click']")).click();
 		driver.switchTo().defaultContent(); // navigates back to main HTML
 		
@@ -32,6 +35,12 @@ public class WebDriverSwitchDemo extends Driver{
 		driver.switchTo().frame(1);
 		driver.switchTo().frame("frame2");
 		driver.findElement(By.id("Click1")).click();
+		/**
+		 * 3 ways to switch to frame
+		 * 1 --> by index --> 	driver.switchTo().frame(1);
+		 * 2 --> by id or name --> driver.switchTo().frame(1)
+		 * 3 --> by web element --> driver.switchTo().frame(driver.findElement(By.xpath("(//iframe)[2]")));
+		 */
 		
 		Common.sleep(3);
 		driver.quit();
@@ -79,6 +88,7 @@ public class WebDriverSwitchDemo extends Driver{
 		String handle = driver.getWindowHandle();
 		
 		driver.findElement(By.xpath("//button[@id='home']")).click();
+		
 		
 		Set<String> handles1 = driver.getWindowHandles();
 		for (String handles : handles1) {

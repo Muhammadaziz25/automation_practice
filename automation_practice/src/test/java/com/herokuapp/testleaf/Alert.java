@@ -16,9 +16,34 @@ import driver.Driver;
  */
 public class Alert extends Driver{
 	
-	@Test(priority = 2)
+	@Test
 	public void alert1() {
-		 driver.get("http://testleaf.herokuapp.com/pages/Alert.html");
+		
+		driver.get("http://testleaf.herokuapp.com/pages/Alert.html");
+		WebDriverWait driverWait = new WebDriverWait(driver, 17);
+		WebElement header = driver.findElement(By.tagName("h1"));
+		
+		driverWait.until(ExpectedConditions.visibilityOf(header));
+		String headerText = header.getText();
+		Assert.assertEquals(headerText, "Handle Alerts");
+		Common.sleep(1);
+		
+		WebElement alertBox = driver.findElement(By.xpath("//button[text()='Alert Box']"));
+		driverWait.until(ExpectedConditions.elementToBeClickable(alertBox));
+		alertBox.click();
+		Common.sleep(1);
+		
+		String alerText = driver.switchTo().alert().getText();
+		Assert.assertEquals(alerText, "I am an alert box!");
+		Common.sleep(1);
+		driver.switchTo().alert().accept();
+		
+		Common.sleep(3);
+		driver.quit();
+		
+		
+		
+		/* driver.get("http://testleaf.herokuapp.com/pages/Alert.html");
 		 WebDriverWait driverWait = new WebDriverWait(driver, 10);
 		 WebElement headerElement = driver.findElement(By.tagName("h1"));
 		 
@@ -40,14 +65,41 @@ public class Alert extends Driver{
 		 
 		 
 		 Common.sleep(3);
-//		 driver.quit();
+		 driver.quit();*/
 		 
 		 
 	}
 	
-	@Test(priority = 1)
+	@Test
 	public void alert2() {
+		
 		driver.get("http://testleaf.herokuapp.com/pages/Alert.html");
+		WebDriverWait driverWait = new WebDriverWait(driver, 17);
+		WebElement alertButton = driver.findElement(By.xpath("//button[text()='Confirm Box']"));
+		driverWait.until(ExpectedConditions.elementToBeClickable(alertButton));
+		alertButton.click();
+		Common.sleep(1);
+		
+		String alertText = driver.switchTo().alert().getText();
+		Assert.assertEquals(alertText, "Press a button!");
+		driver.switchTo().alert().dismiss();
+		Common.sleep(1);
+		String text = driver.findElement(By.id("result")).getText();
+		Assert.assertEquals(text, "You pressed Cancel!");
+		
+		
+//		driver.switchTo().alert().accept();
+//		Common.sleep(1);
+//		String text = driver.findElement(By.id("result")).getText();
+//		Assert.assertEquals(text, "You pressed OK!");
+		
+		Common.sleep(3);
+		driver.quit();
+		
+				
+		
+		
+		/*driver.get("http://testleaf.herokuapp.com/pages/Alert.html");
 		
 		WebDriverWait driverWait = new WebDriverWait(driver, 10);
 		WebElement confirmBox = driver.findElement(By.xpath("//button[text()='Confirm Box']"));
@@ -69,29 +121,49 @@ public class Alert extends Driver{
 //		Assert.assertEquals(pressedText, "You pressed OK!");
 		
 		Common.sleep(3);
-//		driver.quit();
+//		driver.quit();*/
 	}
 	
-	@Test(priority = 3)
+	@Test
 	public void alert3() {
 		driver.get("http://testleaf.herokuapp.com/pages/Alert.html");
 		
-		WebDriverWait driverWait = new WebDriverWait(driver, 10);
-		WebElement confirmBox = driver.findElement(By.xpath("//button[text()='Prompt Box']"));
-		driverWait.until(ExpectedConditions.elementToBeClickable(confirmBox));
-		confirmBox.click();
-		Common.sleep(2);
+		WebDriverWait driverWait = new WebDriverWait(driver, 17);
+		WebElement alertButton = driver.findElement(By.xpath("//button[text()='Prompt Box']"));
+		driverWait.until(ExpectedConditions.elementToBeClickable(alertButton));
+		alertButton.click();
+		Common.sleep(1);
 		
 		String alertText = driver.switchTo().alert().getText();
 		Assert.assertEquals(alertText, "Please enter your training institute name");
-		
-		String inputText = "Tech Centure Academy";
-		driver.switchTo().alert().sendKeys(inputText);
 		Common.sleep(1);
+		String inputText = "Academy";
+		driver.switchTo().alert().sendKeys(inputText);
 		driver.switchTo().alert().accept();
 		String text = driver.findElement(By.id("result1")).getText();
-		Assert.assertEquals(text, "You should not have enjoyed learning at "+ inputText 
-				+" as compared to TestLeaf! Right?");
+		Assert.assertEquals(text, "You should not have enjoyed learning at " + inputText + " as compared to TestLeaf! Right?");
+		
+		Common.sleep(3);
+		driver.quit();
+		
+		
+		
+//		WebDriverWait driverWait = new WebDriverWait(driver, 10);
+//		WebElement confirmBox = driver.findElement(By.xpath("//button[text()='Prompt Box']"));
+//		driverWait.until(ExpectedConditions.elementToBeClickable(confirmBox));
+//		confirmBox.click();
+//		Common.sleep(2);
+//		
+//		String alertText = driver.switchTo().alert().getText();
+//		Assert.assertEquals(alertText, "Please enter your training institute name");
+//		
+//		String inputText = "Tech Centure Academy";
+//		driver.switchTo().alert().sendKeys(inputText);
+//		Common.sleep(1);
+//		driver.switchTo().alert().accept();
+//		String text = driver.findElement(By.id("result1")).getText();
+//		Assert.assertEquals(text, "You should not have enjoyed learning at "+ inputText 
+//				+" as compared to TestLeaf! Right?");
 		Common.sleep(3);
 		driver.quit();
 	}

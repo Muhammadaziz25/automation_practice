@@ -27,6 +27,7 @@ public class User_Registration extends Driver {
 		driver.get(AppProperties.AUTOMATION_PRACTICE_BASE_URL);
 //		driver.findElement(By.cssSelector("[class='login']")).click();
 		driverHelper.click(By.cssSelector("[class='login']"), timeOutInSeconds);
+		driverHelper.waitForElementVisibility(By.cssSelector("[class='login']"), timeOutInSeconds);
 		Common.sleep(1);
 		String firstName = Common.getRandomFirstname();
 		String lastName = Common.getRandomLastname();

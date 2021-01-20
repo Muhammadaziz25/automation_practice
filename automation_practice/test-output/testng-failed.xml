@@ -3,11 +3,11 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.herokuapp.testleaf.Alert">
+      <class name="com.herokuapp.the_internet.FileUpload">
         <methods>
-          <include name="test1"/>
+          <include name="fileUpload"/>
         </methods>
-      </class> <!-- com.herokuapp.testleaf.Alert -->
+      </class> <!-- com.herokuapp.the_internet.FileUpload -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

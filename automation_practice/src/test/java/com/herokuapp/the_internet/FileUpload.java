@@ -3,6 +3,9 @@ package com.herokuapp.the_internet;
 import java.nio.file.Paths;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -22,22 +25,62 @@ public class FileUpload extends Driver {
 	@Test
 	public void fileUpload() {	
 		
-		driver.get(AppProperties.THE_INTERNET_BASE_URL);
-		driverHelper.waitForElementVisibility(By.xpath("//a[text()='File Upload']"), 20);
-		Common.sleep(2);
+		driver.get("http://the-internet.herokuapp.com/");
+		driverHelper.waitForElementVisibility(By.xpath("//a[text()='File Upload']"), 10);
+		driverHelper.takeScreenshot();
+		
 		driver.findElement(By.xpath("//a[text()='File Upload']")).click();
-		Common.sleep(2);
 		
-		String filPath = System.getProperty("user.dir") + "/src/test/resources/files/MB.jpeg";
-		String fileName = Paths.get(filPath).getFileName().toString();
+		String filePath = System.getProperty("user.dir") + "/src/test/resources/files/mbe.jpg";
+		String fileName = Paths.get(filePath).getFileName().toString();
+		System.out.println(fileName);
+		driver.findElement(By.id("file-upload")).sendKeys(filePath);
+		driverHelper.takeScreenshot();
 		
-		driver.findElement(By.id("file-upload")).sendKeys(filPath);
+		
 		String uploadedFile = driver.findElement(By.id("file-upload")).getAttribute("value");
+		System.out.println(uploadedFile);
 		
 		driver.findElement(By.id("file-submit")).click();
 		
-		Common.sleep(5);
+		String actualText = driver.findElement(By.tagName("h3")).getText();
+		String expectedText = "File Uploaded!";
+		Assert.assertEquals(actualText, expectedText);
+		
+		String actualUploadedFile = driver.findElement(By.id("uploaded-files")).getText();
+		String expectedUploadedFile = "mbe.jpg";
+		Assert.assertEquals(actualUploadedFile, expectedUploadedFile);
+		
+		driverHelper.takeScreenshot();
+		
+		
+		Common.sleep(3);
 		driver.quit();
+		
+		
+		
+		
+		
+		
+		
+//		driver.get(AppProperties.THE_INTERNET_BASE_URL);
+//		driverHelper.waitForElementVisibility(By.xpath("//a[text()='File Upload']"), 20);
+//		Common.sleep(2);
+//		driver.findElement(By.xpath("//a[text()='File Upload']")).click();
+//		Common.sleep(2);
+//		
+//		String filPath = System.getProperty("user.dir") + "/src/test/resources/files/MB.jpeg";
+//		String fileName = Paths.get(filPath).getFileName().toString();
+//		System.out.println(fileName);
+//		
+//		driver.findElement(By.id("file-upload")).sendKeys(filPath);
+//		String uploadedFile = driver.findElement(By.id("file-upload")).getAttribute("value");
+//		System.out.println(uploadedFile);
+//		
+//		driver.findElement(By.id("file-submit")).click();
+//		
+//		Common.sleep(5);
+//		driver.quit();
 		
 		
 		
