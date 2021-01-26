@@ -7,10 +7,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import common.AppProperties;
+import common.DriverHelper;
 
 public class Driver {
 
 	protected static WebDriver driver;
+	protected static DriverHelper driverHelper;
 
 	static {
 		if (driver == null)
@@ -36,8 +38,10 @@ public class Driver {
 			System.out.println("Browser type " + browserType + " is invalid");
 			break;
 		}
+		
 		driver.manage().timeouts().pageLoadTimeout(50, TimeUnit.SECONDS);
 		driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+		driverHelper = new DriverHelper(driver);
 		return driver;
 	}
 

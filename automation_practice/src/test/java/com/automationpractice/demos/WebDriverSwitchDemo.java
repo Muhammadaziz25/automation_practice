@@ -20,7 +20,7 @@ import driver.Driver;
 public class WebDriverSwitchDemo extends Driver{
 
 	@Test
-	public void switchToIFrame() {
+	public void switchToIFrame() {									
 		driver.get("http://testleaf.herokuapp.com/pages/frame.html");
 		
 		Common.sleep(1);

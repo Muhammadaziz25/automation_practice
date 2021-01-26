@@ -2,6 +2,7 @@ package common;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
@@ -13,10 +14,17 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class DriverHelper {
-	WebDriver driver;
+	private WebDriver driver;
+	private String mainWindowhandle;
+	
 
 	public DriverHelper(WebDriver driver) {
 		this.driver = driver;
+	}
+	
+	public void openUrl(String url) {
+		driver.get(url);
+		mainWindowhandle = driver.getWindowHandle();
 	}
 
 	public void waitForElementVisibility(By by, int timeOutInSeconds) {
@@ -45,16 +53,28 @@ public class DriverHelper {
 	}
 	
 	public void takeScreenshot() {
-		
 		TakesScreenshot screenshot = (TakesScreenshot) driver;
 		File file = screenshot.getScreenshotAs(OutputType.FILE);
 		
 		try {
-			FileUtils.copyFile(file, new File(System.getProperty("user.dir") +
-					"/target/screenshot/FileName"+ System.currentTimeMillis() + ".png"));
+			FileUtils.copyFile(file, new File(System.getProperty("user.dir") +  
+					"/target/screenshot/FileName" + System.currentTimeMillis() + ".png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+	}
+	
+	public void switchToNewWindow() {
+		
+		Set<String> handles = driver.getWindowHandles();
+		
+		for(String h : handles) {
+			if(h.equals(mainWindowhandle)) {
+				System.out.println("driver will not run");
+			} else {
+				driver.switchTo().window(h);
+			}
 		}
 	}
 	
